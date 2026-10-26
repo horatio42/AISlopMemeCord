@@ -147,7 +147,8 @@ input[type='range'] { accent-color: var(--accent); }
 .table th { text-align: left; padding: 10px 12px; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; border-bottom: 1px solid var(--border); font-weight: 750; white-space: nowrap; }
 .table td { padding: 10px 12px; border-bottom: 1px solid var(--border-soft); vertical-align: middle; }
 .table tr:hover td { background: var(--bg-raised); }
-.table .actions { display: flex; gap: 4px; justify-content: flex-end; }
+.table .actions { text-align: right; white-space: nowrap; }
+.table .actions > * + * { margin-left: 4px; }
 .pagination { display: flex; align-items: center; gap: 8px; justify-content: flex-end; padding: 14px 0; }
 
 /* ---- Utility mini classes ---- */
