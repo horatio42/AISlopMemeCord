@@ -191,6 +191,18 @@ try {
   const memberRow = adminPage.locator('.member-item', { hasText: 'Pixel Goblin' }).first();
   if (await memberRow.count()) { await memberRow.click(); await adminPage.waitForTimeout(600); await shot(adminPage, '13-profile.png'); await adminPage.keyboard.press('Escape'); }
 
+  // Two extra public servers make the Discover card grid representative (and exercise footer alignment).
+  for (const spec of [
+    { name: 'Meme Archaeology', bannerColor: '#ff7aa2', description: 'Digging up dead formats and pretending they were always funny. Bring a shovel and a folder of 2012 reaction images.' },
+    { name: 'Goblin Rights Advocacy Group', bannerColor: '#57d98a', description: 'Legal representation for goblins accused of crimes against thread etiquette. Pro bono. Mostly.' },
+  ]) {
+    const created = await adminRequest.post(base + '/api/servers', { data: spec });
+    if (!created.ok()) throw new Error(`discover fixture server failed: ${created.status()} ${await created.text()}`);
+    const payload = await created.json();
+    const published = await adminRequest.patch(base + `/api/servers/${payload.server.id}`, { data: { isPublic: true, bannerColor: spec.bannerColor } });
+    if (!published.ok()) throw new Error(`discover fixture publish failed: ${published.status()} ${await published.text()}`);
+  }
+
   await adminPage.goto(`${base}/discover`, { waitUntil: 'networkidle' });
   await adminPage.waitForTimeout(800);
   await shot(adminPage, '14-discover.png');
