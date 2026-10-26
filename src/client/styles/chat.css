@@ -133,6 +133,7 @@
 .composer-actions .btn-icon.send { color: var(--accent); }
 .composer-actions .btn-icon.send:hover { background: var(--accent); color: var(--accent-ink); }
 .composer-actions .btn-icon.lock-on { color: var(--success); background: color-mix(in srgb, var(--success) 14%, transparent); }
+.composer-actions .composer-more { display: none; }
 .composer-tools { display: flex; gap: 6px; align-items: center; padding: 2px 10px 6px; }
 .composer-tools .tool-chip { font-size: 10.5px; color: var(--faint); border: 1px solid var(--border-soft); border-radius: 99px; padding: 1px 7px; }
 .composer-tools .tool-chip:hover { color: var(--text-soft); border-color: var(--muted); }
@@ -232,6 +233,11 @@
   .message .msg-gutter { display: none; }
   .message .msg-avatar-col { width: 34px; }
   .message .msg-avatar-col .avatar { width: 34px; height: 34px; }
+}
+@media (max-width: 720px) {
+  .composer-input, .search-bar input, .cmd-input input { font-size: 16px; }
+  .composer-actions .secondary { display: none; }
+  .composer-actions .composer-more { display: inline-flex; }
 }
 .md-image { max-width: min(420px, 100%); border-radius: var(--radius); border: 1px solid var(--border); margin: 6px 0; display: block; cursor: zoom-in; background: var(--bg-void); }
 .md-image:hover { border-color: var(--muted); }

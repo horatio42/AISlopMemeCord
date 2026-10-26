@@ -201,9 +201,17 @@ export function Composer({ channel, replyTo, editing, onSent, onCancelReply, onC
         <div class="composer-actions">
           {channel.type === 'dm' || channel.type === 'group_dm' ? <button class={`btn-icon ${e2ee ? 'lock-on' : ''}`} title={canE2ee ? (e2ee ? 'E2EE on' : 'Encrypt this DM (E2EE)') : 'E2EE unavailable'} onClick={toggleE2ee}><Icon name={e2ee ? 'lock' : 'unlock'} size={17} /></button> : null}
           <button class="btn-icon" title="Emoji" onClick={() => setEmojiOpen((v) => !v)}><Icon name="smile" size={18} /></button>
-          <button class="btn-icon" title="Sticker" onClick={() => setEmojiOpen((v) => !v)}><Icon name="sticker" size={17} /></button>
-          <button class="btn-icon" title="Meme" onClick={() => setMemeOpen((v) => !v)}><Icon name="image" size={17} /></button>
-          <button class="btn-icon" title="Poll" onClick={() => setPollOpen(true)}><Icon name="poll" size={17} /></button>
+          <button class="btn-icon secondary" title="Sticker" onClick={() => setEmojiOpen((v) => !v)}><Icon name="sticker" size={17} /></button>
+          <button class="btn-icon secondary" title="Meme" onClick={() => setMemeOpen((v) => !v)}><Icon name="image" size={17} /></button>
+          <button class="btn-icon secondary" title="Poll" onClick={() => setPollOpen(true)}><Icon name="poll" size={17} /></button>
+          <button class="btn-icon composer-more" title="More message tools" onClick={(e) => {
+            const r = e.currentTarget.getBoundingClientRect();
+            store.openMenu({ clientX: r.left, clientY: r.bottom }, [
+              { label: 'Sticker', icon: 'sticker', action: () => setEmojiOpen(true) },
+              { label: 'Meme', icon: 'image', action: () => setMemeOpen(true) },
+              { label: 'Poll', icon: 'poll', action: () => setPollOpen(true) },
+            ], 'Message tools');
+          }}><Icon name="more" size={17} /></button>
           <button class="btn-icon send" title="Send (Enter)" disabled={sending || uploading > 0} onClick={() => void send()}><Icon name={sending ? 'refresh' : 'send'} size={18} /></button>
         </div>
       </div>

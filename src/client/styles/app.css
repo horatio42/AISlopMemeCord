@@ -232,9 +232,10 @@
   .mobile-bar .mobile-title { font-weight: 750; font-family: var(--font-display); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .home-grid { grid-template-columns: 1fr; }
   .home-container { padding: 20px 14px 40px; }
-  .home-hero { padding: 16px; gap: 12px; }
+  .home-hero { padding: 16px; gap: 12px; flex-wrap: wrap; align-items: flex-start; }
   .home-hero .hero-mascot { width: 64px; height: 64px; }
   .home-hero h1 { font-size: 23px; }
+  .home-hero .card-sticker { flex-basis: 100%; width: 100%; max-width: none !important; }
   .modal-backdrop { padding: 8px; align-items: flex-end; }
   .modal { max-height: 94vh; border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
   .modal.wide, .modal.xwide { width: 100%; height: 94vh; }

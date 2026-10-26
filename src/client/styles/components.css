@@ -22,6 +22,9 @@
 
 /* ---- Inputs ---- */
 .input, .textarea, .select { width: 100%; background: var(--bg-input); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 12px; font-size: 14px; color: var(--text); transition: border-color .12s, box-shadow .12s; }
+@media (max-width: 720px) {
+  .input, .textarea, .select { font-size: 16px; }
+}
 .input::placeholder, .textarea::placeholder { color: var(--faint); }
 .input:focus, .textarea:focus, .select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(184,255,53,.13); }
 [data-theme='light'] .input:focus, [data-theme='light'] .textarea:focus { box-shadow: 0 0 0 3px rgba(107,33,216,.12); }
