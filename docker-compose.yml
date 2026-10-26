@@ -1,0 +1,25 @@
+name: aislopmemecord
+
+services:
+  aislopmemecord:
+    build: .
+    image: aislopmemecord:local
+    container_name: aislopmemecord
+    restart: unless-stopped
+    ports:
+      - "3000:3000"            # the only port you need
+    volumes:
+      - slop-data:/data        # SQLite, uploads, exports, secret key
+    environment:
+      SLOP_REGISTRATION: open  # open | invite | closed (admin can change later)
+      # SLOP_SECURE_COOKIES: "true"   # set when behind HTTPS
+      # SLOP_TRUST_PROXY: "true"      # set behind a trusted reverse proxy
+      # SLOP_STUN_URLS: "stun:stun.l.google.com:19302"  # optional voice NAT traversal
+    healthcheck:
+      test: ["CMD", "bun", "-e", "fetch('http://127.0.0.1:3000/api/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+volumes:
+  slop-data:

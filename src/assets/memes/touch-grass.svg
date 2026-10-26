@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" width="640" height="420">
+<rect width="640" height="420" fill="#081a10"/><circle cx="560" cy="70" r="70" fill="#ffd93d" opacity=".2"/>
+<path d="M0 300c120-30 230 20 340-10s230-30 300 10v120H0Z" fill="#2c7a3f"/><path d="M0 330c130-20 250 20 360 0s210-10 280 20v70H0Z" fill="#3f9e51"/>
+<g stroke="#8be08e" stroke-width="5" stroke-linecap="round" fill="none"><path d="M80 400c0-45 10-60 20-80M120 410c0-40 15-55 25-75M480 400c-2-50 10-65 20-85M540 410c-4-40 10-55 20-70"/></g>
+<g transform="translate(250 175) rotate(-14)"><path d="M20 120c10-55 60-90 110-90 40 0 70 20 72 55 2 30-20 40-42 35l-25 85c-2 10-18 12-22 2l-20-80c-45 4-65-25-73-7Z" fill="#ffd7a6" stroke="#c98b54" stroke-width="5"/><path d="M72 60c15-30 60-30 85 0M95 45c0-20 25-35 40-20M45 100c20-25 65-20 80 5" fill="none" stroke="#c98b54" stroke-width="4" stroke-linecap="round"/></g>
+<rect x="24" y="24" width="330" height="54" rx="12" fill="#a8f22b"/><text x="44" y="60" font-family="Bangers,Impact,sans-serif" font-size="34" fill="#171021">TOUCH GRASS, NERD</text>
+<text x="500" y="390" font-family="Bangers,Impact,sans-serif" font-size="30" fill="#e8ffe8" transform="rotate(-6 500 390)">real</text>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" width="640" height="420">
+<rect width="640" height="420" fill="#171021"/>
+<g opacity=".25" stroke="#3b2a54"><path d="M0 100h640M0 200h640M0 300h640M100 0v420M200 0v420M300 0v420M400 0v420M500 0v420"/></g>
+<g transform="translate(195 60)"><path d="M125 0C40 0 5 60 8 130c2 60 40 95 80 90 18-2 25-20 37-20s19 18 37 20c40 5 78-30 80-90 3-70-32-130-117-130Z" fill="#a8f22b" stroke="#4f8c14" stroke-width="6"/>
+<path d="M52 70c15-20 45-20 60 0" fill="none" stroke="#1a0e2c" stroke-width="8" stroke-linecap="round"/><path d="M140 70c15-20 45-20 60 0" fill="none" stroke="#1a0e2c" stroke-width="8" stroke-linecap="round"/>
+<circle cx="84" cy="92" r="10" fill="#1a0e2c"/><circle cx="166" cy="92" r="10" fill="#1a0e2c"/><path d="M75 140c30 25 80 25 110 0" fill="none" stroke="#1a0e2c" stroke-width="10" stroke-linecap="round"/>
+<path d="M0 220q60-40 125 0l50 90H-50Z" fill="#241533" stroke="#5a3b86" stroke-width="5"/><path d="M125 220l30 80 30-80" fill="#f0f6fc"/><path d="M125 220v80" stroke="#5a3b86" stroke-width="6"/><path d="M125 235l20 20-20 20-20-20Z" fill="#ff5d5d"/></g>
+<text x="430" y="120" font-family="Bangers,Impact,sans-serif" font-size="44" fill="#ffd93d">CEO OF SLOP</text>
+<text x="430" y="160" font-family="Space Grotesk,Arial" font-size="18" fill="#a8b3cf">also known as: unemployed</text>
+<text x="430" y="250" font-family="Space Grotesk,Arial" font-size="16" fill="#7ee787">slop holdings inc.</text>
+<text x="430" y="280" font-family="monospace" font-size="14" fill="#a8b3cf">NASDOG: SLP</text>
+<text x="430" y="320" font-family="monospace" font-size="26" fill="#ff5d5d">▲ 0.69%</text>
+</svg>

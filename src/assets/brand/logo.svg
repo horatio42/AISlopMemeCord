@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="AISlopMemeCord logo">
+  <defs><radialGradient id="a" cx="35%" cy="30%" r="80%"><stop stop-color="#e9ff70"/><stop offset=".5" stop-color="#a8f22b"/><stop offset="1" stop-color="#43a51c"/></radialGradient></defs>
+  <path d="M32 5C15 5 6 17 5 34c-1 12 3 21 10 25 5 3 9-3 12-3s6 8 12 5c6-2 9-7 10-15 2-11 9-15 9-22C56 12 47 5 32 5Z" fill="url(#a)"/>
+  <circle cx="24" cy="27" r="7" fill="#fff"/><circle cx="41" cy="27" r="7" fill="#fff"/>
+  <circle cx="26" cy="28" r="3.5" fill="#170c26"/><circle cx="39" cy="28" r="3.5" fill="#170c26"/>
+  <path d="M24 43c5 6 12 6 17 0" fill="none" stroke="#26113c" stroke-width="3.4" stroke-linecap="round"/>
+</svg>
