@@ -13,6 +13,11 @@ interface Peer {
 class VoiceManager {
   private peers = new Map<string, Peer>();
   private localStream: MediaStream | null = null;
+  private outboundStream: MediaStream | null = null;
+  private soundCtx: AudioContext | null = null;
+  private soundMix: MediaStreamAudioDestinationNode | null = null;
+  private soundMonitor: GainNode | null = null;
+  private micGain: GainNode | null = null;
   private audioCtx: AudioContext | null = null;
   private analyser: AnalyserNode | null = null;
   private speakTimer: number | null = null;
@@ -48,6 +53,7 @@ class VoiceManager {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true }, video: false });
       this.localStream = stream;
+      this.initSoundMixer();
       const res = await api.post<any>(`/api/channels/${channelId}/voice/join`, { muted: store.state.voice.muted, deafened: store.state.voice.deafened });
       this.channelId = channelId;
       this.iceServers = res.iceServers ?? [];
@@ -81,6 +87,7 @@ class VoiceManager {
     const muted = !store.state.voice.muted;
     store.updateVoice({ muted });
     if (this.localStream) for (const track of this.localStream.getAudioTracks()) track.enabled = !muted;
+    if (this.micGain) this.micGain.gain.value = muted ? 0 : 1;
     if (this.channelId) gateway.voiceState(this.channelId, { muted });
     return muted;
   }
@@ -89,15 +96,61 @@ class VoiceManager {
     const muted = deafened ? true : store.state.voice.muted;
     store.updateVoice({ deafened, muted });
     if (this.localStream) for (const track of this.localStream.getAudioTracks()) track.enabled = !muted;
+    if (this.micGain) this.micGain.gain.value = muted ? 0 : 1;
+    if (this.soundMonitor) this.soundMonitor.gain.value = deafened ? 0 : 1;
     for (const peer of this.peers.values()) if (peer.audio) peer.audio.muted = deafened;
     if (this.channelId) gateway.voiceState(this.channelId, { deafened, muted });
     return deafened;
   }
 
+  private initSoundMixer() {
+    if (!this.localStream || this.soundCtx) return;
+    try {
+      const ctx = new AudioContext();
+      const mix = ctx.createMediaStreamDestination();
+      const mic = ctx.createMediaStreamSource(this.localStream);
+      const micGain = ctx.createGain();
+      micGain.gain.value = store.state.voice.muted ? 0 : 1;
+      mic.connect(micGain).connect(mix);
+      const monitor = ctx.createGain();
+      monitor.gain.value = store.state.voice.deafened ? 0 : 1;
+      monitor.connect(ctx.destination);
+      this.soundCtx = ctx;
+      this.soundMix = mix;
+      this.micGain = micGain;
+      this.soundMonitor = monitor;
+      this.outboundStream = mix.stream;
+    } catch (e) {
+      console.warn('soundboard mixer unavailable', e);
+    }
+  }
+
+  async playSound(url: string): Promise<void> {
+    const ctx = this.soundCtx;
+    const mix = this.soundMix;
+    if (!ctx || !mix) throw new Error('Voice mixer is not ready. Rejoin voice and try again.');
+    if (ctx.state === 'suspended') await ctx.resume();
+    const res = await fetch(url, { credentials: 'same-origin' });
+    if (!res.ok) throw new Error(`Sound download failed (${res.status}).`);
+    const buffer = await ctx.decodeAudioData(await res.arrayBuffer());
+    const source = ctx.createBufferSource();
+    source.buffer = buffer;
+    const gain = ctx.createGain();
+    gain.gain.value = 0.9;
+    source.connect(gain);
+    gain.connect(mix);
+    if (this.soundMonitor) gain.connect(this.soundMonitor);
+    source.onended = () => {
+      try { source.disconnect(); gain.disconnect(); } catch { /* already disconnected */ }
+    };
+    source.start();
+  }
+
   private async createPeer(remoteId: string): Promise<Peer> {
     const pc = new RTCPeerConnection({ iceServers: this.iceServers });
     const peer: Peer = { pc, stream: null, audio: null, pendingIce: [], polite: true };
-    if (this.localStream) for (const track of this.localStream.getTracks()) pc.addTrack(track, this.localStream);
+    const outbound = this.outboundStream ?? this.localStream;
+    if (outbound) for (const track of outbound.getAudioTracks()) pc.addTrack(track, outbound);
     pc.onicecandidate = (e) => { if (e.candidate && this.channelId) gateway.voiceSignal(this.channelId, remoteId, 'ice', e.candidate.toJSON()); };
     pc.ontrack = (e) => {
       const stream = e.streams[0] ?? new MediaStream([e.track]);
@@ -186,6 +239,12 @@ class VoiceManager {
   private cleanupMedia() {
     this.localStream?.getTracks().forEach((t) => t.stop());
     this.localStream = null;
+    this.outboundStream?.getTracks().forEach((t) => t.stop());
+    this.outboundStream = null;
+    this.micGain = null;
+    this.soundMix = null;
+    this.soundMonitor = null;
+    if (this.soundCtx) { void this.soundCtx.close().catch(() => {}); this.soundCtx = null; }
   }
 }
 

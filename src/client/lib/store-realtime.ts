@@ -309,7 +309,8 @@ export function handleGateway(store: StoreLike, t: string, d: any) {
       break;
     }
     case 'VOICE_SOUND': {
-      if (d?.url) { try { const audio = new Audio(d.url); audio.volume = 0.8; void audio.play().catch(() => {}); } catch { /* ignore */ } }
+      // Soundboard audio is mixed into the sender's WebRTC track. Playing the URL
+      // here would double it for voice peers and depend on autoplay permission.
       break;
     }
     default: break;

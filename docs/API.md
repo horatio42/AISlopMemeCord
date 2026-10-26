@@ -353,8 +353,10 @@ curl -b cookies.txt -H "x-csrf-token: $CSRF" \
 | `GET` | `/api/sounds/global` | Bundled/global sounds |
 | `GET` | `/api/servers/:id/voice-states` | Current participants per voice channel |
 
-The HTTP endpoints update server-side presence; actual SDP/ICE crosses the WebSocket (`voice_signal`). There is no
-server audio relay, recording or screen share. Media never passes through the API. `SLOP_STUN_URLS` controls the
+The HTTP endpoints update server-side presence; actual SDP/ICE crosses the WebSocket (`voice_signal`). Soundboard
+playback is mixed into the caller's outgoing WebRTC audio; the play endpoint returns the clip URL and emits
+`VOICE_SOUND` for room state. There is no server audio relay, recording or screen share. Media never passes through
+the API. `SLOP_STUN_URLS` controls the
 optional ICE servers returned to clients.
 
 ## Admin (`/api/admin/*`)

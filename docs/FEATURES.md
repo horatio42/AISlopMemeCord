@@ -151,8 +151,9 @@ tracks who is connected. Mute, deafen, speaking indicators, participant tiles an
 
 ![Voice channel](../screenshots/17-voice.png)
 
-Soundboard clips are same-origin bundled audio; playback is broadcast to the voice room. Global sounds appear only
-when demo seeding is enabled; server sounds are managed per server.
+Soundboard clips are same-origin bundled audio, mixed into the requesting participant's outgoing WebRTC audio so
+every connected voice peer hears them through the call. Global sounds appear only when demo seeding is enabled;
+server sounds are managed per server.
 
 **Honest limits:** no TURN relay, no recording, no transcription, no server media routing, no screen sharing and no
 voice calls inside DMs. Mesh topology means every participant connects to every other participant. Configure

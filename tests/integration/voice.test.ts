@@ -45,7 +45,9 @@ describe('voice', () => {
     expect(sounds.status).toBe(200);
     expect(sounds.body.sounds.some((s: any) => s.id === 'snd_test')).toBe(true);
     const soundWait = waitFor(ws, (p) => p.t === 'VOICE_SOUND');
-    await member.post(`/api/channels/${voice.id}/soundboard/snd_test/play`);
+    const played = await member.post(`/api/channels/${voice.id}/soundboard/snd_test/play`);
+    expect(played.status).toBe(200);
+    expect(played.body.url).toContain('/static/assets/sounds/');
     const soundEvent = await soundWait;
     expect(soundEvent.d.name).toBe('Airhorn');
 

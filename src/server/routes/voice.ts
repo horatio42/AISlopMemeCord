@@ -77,7 +77,7 @@ export function register(router: Router) {
     if (!sound) throw new ApiError(404, 'SOUND_NOT_FOUND', 'That sound does not exist in this server.');
     const url = sound.path.startsWith('/') ? sound.path : `/api/media/uploads/${sound.path}`;
     ctx.hub.relaySound(channel.id, ctx.user!.id, sound.id, sound.name, url);
-    return json({ ok: true, soundId: sound.id });
+    return json({ ok: true, soundId: sound.id, url });
   }, { rateLimit: { windowMs: 10_000, max: 8 } });
 
   router.get('/api/sounds/global', (ctx) => {

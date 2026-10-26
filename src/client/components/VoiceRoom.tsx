@@ -24,8 +24,10 @@ export function VoiceRoom({ channel }: { channel: Channel }) {
   const participants = joined ? state.voice.participants : preview.map((p: any) => ({ userId: p.userId, user: p.user, muted: p.muted, deafened: p.deafened, speaking: p.speaking }));
   const join = () => voice.join(channel.id);
   const play = async (soundId: string) => {
-    try { await api.post(`/api/channels/${channel.id}/soundboard/${soundId}/play`); }
-    catch (e) { store.toast(errorMessage(e), 'error'); }
+    try {
+      const res = await api.post<{ url: string }>(`/api/channels/${channel.id}/soundboard/${soundId}/play`);
+      await voice.playSound(res.url);
+    } catch (e) { store.toast(errorMessage(e), 'error'); }
   };
   return <div style={{ flex: 1, overflowY: 'auto', padding: '30px 24px', display: 'flex', flexDirection: 'column', gap: 20 }}>
     <div class="home-hero" style={{ margin: 0, alignItems: 'center', background: 'radial-gradient(circle at 20% 20%, rgba(87,217,138,.13), transparent 60%), var(--bg-raised)' }}>
