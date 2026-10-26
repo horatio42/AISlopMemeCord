@@ -1,6 +1,6 @@
 import { useApp, store } from '../lib/use-store';
 import { Icon } from './Icons';
-import { Avatar, AvatarStack } from './Avatar';
+import { Avatar } from './Avatar';
 import { UserPanel } from './UserPanel';
 import type { DMChannel } from '../../shared/types';
 
@@ -28,7 +28,9 @@ export function DMSidebar(props: { onAddFriend: () => void; open?: boolean }) {
     return (
       <button key={dm.id} class={`dm-item ${active ? 'active' : ''}`} onClick={() => void store.openChannel(null, dm.id)} title={label}>
         {dm.type === 'group_dm' && people.length > 1 ? (
-          <div style={{ width: 32, display: 'flex' }}><AvatarStack users={people} size={28} max={2} /></div>
+          <div class="dm-group-avatar">
+            {people.slice(0, 2).map((p) => <Avatar key={p.id} user={p} size={20} status={false} />)}
+          </div>
         ) : <Avatar user={person ?? { id: dm.id, displayName: label }} size={32} />}
         <span class="dm-name">{label}{dm.type === 'group_dm' ? <span class="faint" style={{ fontSize: 10 }}> · {people.length + 1}</span> : null}</span>
         {mentions > 0 ? <span class="dm-badge">{mentions > 99 ? '99+' : mentions}</span> : unread > 0 ? <span class="dm-badge">{unread > 99 ? '99+' : unread}</span> : null}

@@ -134,6 +134,10 @@
 .dm-item:hover { background: var(--bg-hover); color: var(--text); }
 .dm-item.active { background: var(--bg-active); color: var(--text); }
 .dm-item .dm-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dm-group-avatar { position: relative; width: 32px; height: 32px; flex: 0 0 32px; }
+.dm-group-avatar > .avatar-wrap { position: absolute; }
+.dm-group-avatar > .avatar-wrap:first-child { left: 0; top: 0; }
+.dm-group-avatar > .avatar-wrap:last-child { right: 0; bottom: 0; }
 .dm-item .dm-badge { background: var(--danger); color: #fff; font-size: 10px; font-weight: 800; border-radius: 99px; min-width: 17px; height: 17px; display: flex; align-items: center; justify-content: center; padding: 0 5px; }
 .dm-group-label { padding: 12px 12px 4px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: var(--faint); }
 .home-tabs { display: flex; align-items: center; gap: 4px; padding: 10px 12px; border-bottom: 1px solid var(--border-soft); }
@@ -156,7 +160,7 @@
 .server-card .sc-banner { height: 76px; flex-shrink: 0; background: linear-gradient(120deg, var(--purple), var(--pink), var(--accent-2)); position: relative; }
 .server-card .sc-body { flex: 1; display: flex; flex-direction: column; padding: 0 14px 14px; margin-top: -24px; }
 .server-card .sc-icon { width: 52px; height: 52px; flex-shrink: 0; border-radius: 14px; border: 3px solid var(--bg-raised); background: var(--bg-active); object-fit: cover; margin-bottom: 8px; }
-.server-card .sc-name { flex-shrink: 0; min-height: 2.6em; font-family: var(--font-display); font-weight: 750; font-size: 15px; line-height: 1.3; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.server-card .sc-name { flex-shrink: 0; font-family: var(--font-display); font-weight: 750; font-size: 15px; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .server-card .sc-desc { flex-shrink: 0; color: var(--muted); font-size: 12.5px; min-height: 36px; margin: 3px 0 10px; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .server-card .sc-footer { margin-top: auto; }
 .server-card .sc-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; color: var(--faint); font-size: 11px; }

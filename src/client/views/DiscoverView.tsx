@@ -68,7 +68,7 @@ export function DiscoverView() {
                   <div class="sc-body">
                     {s.icon ? <img class="sc-icon" src={s.icon} alt="" /> : <div class="sc-icon center" style={{ display: 'flex', fontSize: 22, fontWeight: 800, color: 'var(--accent-ink)', background: 'var(--accent)' }}>{s.name?.charAt(0)}</div>}
                     <div class="sc-name" title={s.name}>{s.name}</div>
-                    <div class="sc-desc">{s.description || 'No description. The mystery is the marketing.'}</div>
+                    <div class="sc-desc" title={s.description || undefined}>{s.description || 'No description. The mystery is the marketing.'}</div>
                     <div class="sc-footer">
                       <div class="sc-meta"><Icon name="users" size={11} /> {s.memberCount ?? 0} {(s.memberCount ?? 0) === 1 ? 'member' : 'members'} {s.onlineCount ? `· ${s.onlineCount} online` : ''}</div>
                       <button class={`btn btn-sm btn-block ${member ? '' : 'btn-primary'}`} disabled={joining === s.id} onClick={() => join(s)}>
