@@ -32,8 +32,8 @@ cd AISlopMemeCord
 docker compose up -d --build
 ```
 
-The compose file uses a named volume `slop-data` and opens `3000`. The GitHub Actions publish job also pushes
-`ghcr.io/horatio42/aislopmemecord:latest`; use that image instead of building when it is publicly pullable.
+The compose file uses a named volume `slop-data` and opens `3000`. The GitHub Actions publish job also pushes the
+public `ghcr.io/horatio42/aislopmemecord:latest` image, verified with an anonymous pull and a container smoke test.
 
 ## Data directory
 

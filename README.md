@@ -86,8 +86,8 @@ docker run -d \
   aislopmemecord:local
 ```
 
-The included GitHub Actions workflow publishes `ghcr.io/horatio42/aislopmemecord:latest` on pushes to `main`.
-Use it instead of the local build if the package is public:
+The included GitHub Actions workflow publishes the public image
+`ghcr.io/horatio42/aislopmemecord:latest` on pushes to `main`. Use it instead of the local build:
 
 ```bash
 docker run -d \
