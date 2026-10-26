@@ -431,6 +431,9 @@ export function register(router: Router) {
 
   router.post('/api/admin/users/:id/reset-password', async (ctx) => {
     const row = admin_require_user(ctx, ctx.params.id!);
+    if (row.id === ctx.user!.id) {
+      throw new ApiError(400, 'SELF_RESET', 'Use Settings → Password to change your own password. Resetting yourself here would revoke the session showing you the temporary password.');
+    }
     const alphabet = 'abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789';
     const bytes = crypto.getRandomValues(new Uint8Array(16));
     let temporaryPassword = '';

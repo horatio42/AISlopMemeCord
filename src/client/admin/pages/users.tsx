@@ -297,8 +297,12 @@ function UserDrawer(props: {
                   </form>
 
                   <h3 style={{ marginTop: 20 }}>Password</h3>
-                  <p class="admin-hint">Resets the password, revokes every session and shows a one-time temporary password.</p>
-                  <button class="btn btn-sm btn-danger" disabled={!!busy} onClick={() => run('password', async () => {
+                  <p class="admin-hint">
+                    {isSelf
+                      ? 'Change your own password in Settings → Password. Admin reset revokes every session, including the one showing the temporary password.'
+                      : 'Resets the password, revokes every session and shows a one-time temporary password. Copy it before closing the modal.'}
+                  </p>
+                  <button class="btn btn-sm btn-danger" disabled={!!busy || isSelf} title={isSelf ? 'Use Settings → Password to change your own password' : undefined} onClick={() => run('password', async () => {
                     const res = await api.post<{ temporaryPassword: string }>(`/api/admin/users/${user.id}/reset-password`);
                     setTempPassword(res.temporaryPassword);
                     return 'Password reset. Hand the temp code to the user out-of-band.';

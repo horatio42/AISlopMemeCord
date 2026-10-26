@@ -377,6 +377,12 @@ describe('admin console', () => {
     const afterRevoke = await tempClient.get('/api/auth/me');
     expect(afterRevoke.body.user).toBeNull();
 
+    const selfReset = await alice.post(`/api/admin/users/${alice.userId}/reset-password`);
+    expect(selfReset.status).toBe(400);
+    expect(selfReset.body.error).toBe('SELF_RESET');
+    const stillLoggedIn = await alice.get('/api/auth/me');
+    expect(stillLoggedIn.body.user?.id).toBe(alice.userId);
+
     const selfDisable = await alice.patch(`/api/admin/users/${alice.userId}`, { disabled: true });
     expect(selfDisable.status).toBe(400);
     expect(selfDisable.body.error).toBe('SELF_DISABLE');
