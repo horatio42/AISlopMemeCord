@@ -32,7 +32,7 @@ and never phones home. It looks like Discord fell into a neon dumpster behind a 
 It is **not** a serious product. It is a real chat application with real permissions, real WebRTC audio,
 real tests and a real admin console. Both things can be true.
 
-A live, invite-only instance runs at **<https://aislopmemecord.horatiostudios.com/>**.
+A live instance with public registration runs at **<https://aislopmemecord.horatiostudios.com/>**.
 
 ## Why would anyone build this?
 
